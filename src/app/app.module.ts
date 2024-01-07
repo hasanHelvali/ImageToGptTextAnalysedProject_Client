@@ -6,6 +6,9 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './layout/navbar/navbar.component';
 import { HomeModule } from './home/home.module';
 import { UploadModule } from './upload/upload.module';
+import { HttpClientModule } from '@angular/common/http';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -16,9 +19,12 @@ import { UploadModule } from './upload/upload.module';
     BrowserModule,
     AppRoutingModule,
     HomeModule,
-    UploadModule
+    UploadModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    NgxSpinnerModule,
   ],
-  providers: [],
+  providers: [{provide:"baseUrl",useValue:"https://localhost:7222/api",multi:true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

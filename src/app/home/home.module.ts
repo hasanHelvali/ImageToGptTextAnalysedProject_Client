@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home.component';
 import { UploadModule } from '../upload/upload.module';
 import { RouterModule } from '@angular/router';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -14,7 +16,10 @@ import { RouterModule } from '@angular/router';
     CommonModule,
     RouterModule.forChild([
       {path:"",component:HomeComponent}
-    ])
+    ]),
+    NgxSpinnerModule,
+    FormsModule
+
   ],
   exports:[HomeComponent]
 

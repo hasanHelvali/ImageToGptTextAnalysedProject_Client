@@ -1,1 +1,46 @@
-<p>get-analysis works!</p>
+<div *ngIf="!requestState" class="center">
+    <ngx-file-drop dropZoneLabel="Drop files here" (onFileDrop)="selectedFiles($event)" [accept]="'.png,.jpg,.jpeg'">
+        <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+          Duygu Analizi Yapmak İstediğiniz Görselleri Seçiniz...
+          <button class="btn btn-secondary ms-5" type="button" (click)="openFileSelector()">Dosya Seç</button>
+        </ng-template>
+    </ngx-file-drop>
+    <div class="upload-table" *ngIf="files">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Seçilen Dosyalar</th>
+                </tr>
+            </thead>
+            <tbody class="upload-name-style"> 
+                <tr *ngFor="let item of files; let i=index">
+                    <td><strong>{{ item.relativePath }}</strong></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div *ngIf="imageUrls.length>0">
+    <ng-container *ngTemplateOutlet="pictures"></ng-container>
+</div>
+
+<ng-template #pictures>
+    <div class="row align-items-center justify-content-center p-3 " style="background-color: lightgray;">
+      <div class="col-3" *ngFor="let imageUrl of imageUrls">
+        <div class=" images  " >
+          <img src="{{imageUrl}}" class="card-img border border-dark rounded"  width="256px"height="256px" >
+        </div>
+      </div>
+    </div>
+    <button *ngIf="!requestState" (click)="fileUpload()" class="btn btn-success d-flex m-auto">Analize Başla</button>
+  </ng-template>
+
+  <div *ngIf="responseState" class="border border-3 border-secondary container mt-5 text-center">
+    <span style="color: darkslategray;">Analiz Sonucu</span>
+    <hr>
+    <textarea ngModel id="textArea" rows="10"
+    maxlength="500" style="resize: none; height:100%; width: 100% ; border: none;"
+     required disabled [value]="sonuc"></textarea>
+     <button class="btn btn-danger d-flex m-auto" (click)="newAnalyse()">Yeni Analiz</button>
+  </div>
